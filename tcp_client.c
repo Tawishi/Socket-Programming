@@ -7,8 +7,28 @@
 #include<netinet/in.h> //has structure to store address information
 #include <unistd.h> // close()
 
-int main() {
+#define PY_SSIZE_T_CLEAN
+#include<Python.h>
+
+int main(int argc, char *argv[]) {
 	
+	// Encrypt using Julius-Caesar cipher
+	int key = 10, __value;
+	char cipher[256] = {0};
+	for (int i = 0; i < 26; ++i) {
+		__value = (i + key) % 26;
+		cipher[97+i] = __value; //a-z
+		cipher[65+i] = __value; //A-Z
+	}
+
+	int j = -1;
+	char *cipher_message[100];
+	for(int i=1;i<argc;i++) {
+		while(argv[i][++j]) {
+			cipher_message[i-1][j] = cipher[argv[i][j]];
+		}
+	}
+
 	// TCP Client
 
 	// Create a Socket
@@ -32,9 +52,8 @@ int main() {
 	if (connection_status == -1)
 		printf("There was an error making a connection to the remote server\n\n");
 	
-	// Receive data from Server
-	char server_response[256];
-	recv(network_socket, &server_response, sizeof(server_response), 0);
+	// send data to Server
+	send(network_socket, cipher, sizeof(cipher), 0);
 	
 	// print the data
 	printf("The server sent the data %s \n\n", server_response);

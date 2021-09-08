@@ -36,10 +36,9 @@ int main() {
     // 3-size for address of client
     client_socket = accept(server_socket, NULL, NULL);
 
-    // send data to client
-    // 1-client socket
-    // 2-data, 3- size of data
-    send(client_socket, server_message, sizeof(server_message), 0);
+    // Receive cipher from client
+    char client_response[256];
+    recv(client_socket, &client_response, sizeof(client_response), 0);
 
     //close socket
     close(server_socket);
