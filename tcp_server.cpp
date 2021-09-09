@@ -11,9 +11,6 @@
 using namespace std;
 
 int main() {
-
-    // char server_message[256] = "You have reached the server";
-
     // Create server socket
     int server_socket;
     server_socket = socket(AF_INET,SOCK_STREAM, 0);
@@ -38,11 +35,6 @@ int main() {
     // 2-structure for address for client
     // 3-size for address of client
     client_socket = accept(server_socket, NULL, NULL);
-
-    // send data to client
-    // 1-client socket
-    // 2-data, 3- size of data
-    // send(client_socket, server_message, sizeof(server_message), 0);
 
     // Receive data from Client
 	char client_message[256];

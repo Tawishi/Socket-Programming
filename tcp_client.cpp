@@ -32,13 +32,6 @@ int main(int argc, char** argv) {
 
 	if (connection_status == -1)
 		printf("There was an error making a connection to the remote server\n\n");
-	
-	// Receive data from Server
-	// char server_response[256];
-	// recv(network_socket, &server_response, sizeof(server_response), 0);
-
-	// print the data
-	// printf("The server sent the data %s \n\n", server_response);
 
 	// Send encrypted message to Server
 	// char server_message[256] = "tawishi";
