@@ -1,4 +1,4 @@
-# Socket-Programming
+# Socket-Programming [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 (on a linux machine)<br>
 C++/C code for sending encrypted message from Client to Server and decryting it at the server.
 1. Compile
