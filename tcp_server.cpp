@@ -1,12 +1,14 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include<iostream>
+#include<string>
 
 #include<sys/socket.h> //has APIs to create sockets
 #include<sys/types.h>
 
 #include<netinet/in.h> //has structure to store address information
-#include <unistd.h> // close()
+#include<unistd.h> // close()
+#include "decrypt.h"
 
+using namespace std;
 
 int main() {
 
@@ -47,8 +49,9 @@ int main() {
 	recv(client_socket, &client_message, sizeof(client_message), 0);
 
 	// print the data
-    // string plaintext = ;
-	printf("The client sent the message - \n%s \n\n", client_message);
+    string plaintext = decrypt(client_message);
+	printf("The client sent the message - %s\nwhich translates to ", client_message);
+    cout<<plaintext<<"\n\n";
 
     //close socket
     close(server_socket);
