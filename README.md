@@ -1,4 +1,4 @@
-# Socket-Programming
+# Socket-Programming [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 C code for sending message from Server to Client.
 ### Running programs
 1. Compile
