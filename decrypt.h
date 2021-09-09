@@ -7,7 +7,7 @@ using namespace std;
 string decrypt(string message)
 {
     string result = "";
-    int s = 26 - 10;
+    int s = 26 - 10; // using cyclic property of Caesar-cipher
     // traverse text
     for (int i=0;i<message.length();i++)
     {
