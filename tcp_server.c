@@ -18,7 +18,7 @@ int main() {
     // define server address
     struct sockaddr_in server_address;
     server_address.sin_family = AF_INET; // type/family of connection address
-	server_address.sin_port = htons(8000); // remote connection port -> integer port put in right network order
+	server_address.sin_port = htons(8080); // remote connection port -> integer port put in right network order
 	server_address.sin_addr.s_addr = INADDR_ANY; // actual server address - we connect to any IP on local
 
     // bind socket to specified IP and port
