@@ -6,8 +6,9 @@
 
 #include<netinet/in.h> //has structure to store address information
 #include <unistd.h> // close()
+#include "encrypt.h" // header to encrypt message
 
-int main() {
+int main(int argc, char** argv) {
 	
 	// TCP Client
 
@@ -33,11 +34,16 @@ int main() {
 		printf("There was an error making a connection to the remote server\n\n");
 	
 	// Receive data from Server
-	char server_response[256];
-	recv(network_socket, &server_response, sizeof(server_response), 0);
-	
+	// char server_response[256];
+	// recv(network_socket, &server_response, sizeof(server_response), 0);
+
 	// print the data
-	printf("The server sent the data %s \n\n", server_response);
+	// printf("The server sent the data %s \n\n", server_response);
+
+	// Send encrypted message to Server
+	char server_message[256] = "tawishi";
+	string str_ server_message = encrypt(argc, argv);
+	send(network_socket, server_message, sizeof(server_message), 0);
 	
 	// close socket
 	close(network_socket);

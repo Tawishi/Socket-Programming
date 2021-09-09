@@ -7,9 +7,10 @@
 #include<netinet/in.h> //has structure to store address information
 #include <unistd.h> // close()
 
+
 int main() {
 
-    char server_message[256] = "You have reached the server";
+    // char server_message[256] = "You have reached the server";
 
     // Create server socket
     int server_socket;
@@ -39,7 +40,15 @@ int main() {
     // send data to client
     // 1-client socket
     // 2-data, 3- size of data
-    send(client_socket, server_message, sizeof(server_message), 0);
+    // send(client_socket, server_message, sizeof(server_message), 0);
+
+    // Receive data from Client
+	char client_message[256];
+	recv(client_socket, &client_message, sizeof(client_message), 0);
+
+	// print the data
+    // string plaintext = ;
+	printf("The client sent the message - \n%s \n\n", client_message);
 
     //close socket
     close(server_socket);
