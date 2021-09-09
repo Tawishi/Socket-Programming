@@ -34,7 +34,6 @@ int main(int argc, char** argv) {
 		printf("There was an error making a connection to the remote server\n\n");
 
 	// Send encrypted message to Server
-	// char server_message[256] = "tawishi";
 	string str_server_message = encrypt(argc, argv);
 	char server_message[256];
 

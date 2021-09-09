@@ -12,10 +12,10 @@ string decrypt(string message)
     for (int i=0;i<message.length();i++)
     {
         // apply transformation to each character
-        // Encrypt Uppercase letters
         if(message[i]==' ' || message[i]=='.') {
             result += message[i];
         }
+        // Encrypt Uppercase letters
         else if (isupper(message[i]))
             result += char(int(message[i]+s-65)%26 +65);
  
