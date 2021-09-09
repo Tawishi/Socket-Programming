@@ -41,8 +41,14 @@ int main(int argc, char** argv) {
 	// printf("The server sent the data %s \n\n", server_response);
 
 	// Send encrypted message to Server
-	char server_message[256] = "tawishi";
-	string str_ server_message = encrypt(argc, argv);
+	// char server_message[256] = "tawishi";
+	string str_server_message = encrypt(argc, argv);
+	char server_message[256];
+
+	for(int i=0;i<str_server_message.length();i++) {
+		server_message[i] = str_server_message[i];
+	}
+
 	send(network_socket, server_message, sizeof(server_message), 0);
 	
 	// close socket
