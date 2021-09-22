@@ -32,9 +32,7 @@ class rsa {
         double decrypt(double cipher)
         {          
             long double m = pow(cipher, private_key[1]);
-            cout<<"m="<<m<<" ";
             m = fmod(m, private_key[0]);
-            cout<<"m="<<m<<" "<<private_key[0]<<endl;
             return m;
         }
 

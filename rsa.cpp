@@ -9,7 +9,7 @@ int main()
 {
 	rsa _algo;
 	double m = _algo.encrypt(12);
-	cout<<m<< "\n";
-	cout<<_algo.decrypt(m)<<"\n";
+	cout<<"Encrypted key = "<<m<<"\n";
+	cout<<"Original key after decryption = "<<_algo.decrypt(m)<<"\n";
 	return 0;
 }
