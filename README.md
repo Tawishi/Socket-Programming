@@ -1,20 +1,13 @@
-# Socket-Programming [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# RSA Algorithm Implementation [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 (on a linux machine)<br>
-C++/C code for sending encrypted message from Client to Server and decryting it at the server.
+C++/C code for encrypting and decrypting a key using RSA algorithm.
 1. Compile
  ```
- g++ tcp_client.cpp -o client
- g++ tcp_server.cpp -o server
+ g++ rsa.cpp -o rsa
  ```
 2. Run<br>
- First run the server and then the client in seperate terminal windows
  ```
- ./server
- ```
- ```
- ./client
+ ./rsa
  ```
   ### Output
-![image](https://github.com/Tawishi/Socket-Programming/blob/Caesar-ciper/Images/nsc2.jpg)<br>
-![image](https://github.com/Tawishi/Socket-Programming/blob/Caesar-ciper/Images/nsc3.jpg)
-<b>Note : </b><i>For string input with more than one word enclose input within ""</i>
+![image](https://user-images.githubusercontent.com/55306738/134353577-02e9d459-6e51-4234-8c26-583af8fbaeeb.png)
