@@ -44,14 +44,9 @@ int main(int argc, char** argv) {
 	// create digital envelope using RSA
 	double __sym_key = 10;
 	double digital_env = pow(__sym_key, assym_public_key[1]);
-	cout<<"assym_public_key(n,e)="<<"("<<assym_public_key[0]<<","<<assym_public_key[1]<<")\n";
-	cout<<"pow(m,e)="<<digital_env<<"\n";
     digital_env = fmod(digital_env, assym_public_key[0]);
-	cout<<"% n ="<<digital_env<<"\n";
 
 	// send the digital evelope to server
-	cout<<"size digital env = "<<sizeof(digital_env)<<"\n";
-	cout<<"digital env = "<<digital_env<<"\n";
 	write(network_socket, &digital_env,sizeof(digital_env));
 
 	// send the symmetric encrypted message to server

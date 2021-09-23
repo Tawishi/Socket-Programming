@@ -46,19 +46,8 @@ int main() {
     vector<double> public_key = __keys.generate_keys();
     vector<double> private_key = __keys.get_private_key();
 
-    for(int i=0;i<public_key.size();i++)
-        cout<<public_key[i]<<" ";
-    cout<<endl;
-
-    for(int i=0;i<private_key.size();i++)
-        cout<<private_key[i]<<" ";
-    cout<<endl; 
-
     // send public key to client
     double pub_key[] = {public_key[0],public_key[1]};
-    for(int i=0;i<2;i++)
-        cout<<pub_key[i]<<" ";
-    cout<<endl;
     send(client_socket, pub_key,sizeof(pub_key),0);
     cout<<"Public key shared with client\n\n";
 
@@ -67,14 +56,10 @@ int main() {
     auto n = read(client_socket, &digital_env,sizeof(digital_env));
     if (n < 0) 
         printf("ERROR reading from socket");
-    cout<<"Digital envelope sent by client : "<<digital_env<<"\n";
 
     // decrypt Symmetric key using sender Private key - RSA
-    cout<<"private_key(d)="<<private_key[1]<<endl;
     double K = pow(digital_env, private_key[1]);
-    cout<<"K="<<K<<"\n";
     K = fmod(K, private_key[0]);
-    cout<<"K="<<K<<"\n";
 	
     // receive and decrtypt the encrypted message from client
     char message[255];
