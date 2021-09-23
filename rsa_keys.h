@@ -55,10 +55,17 @@ class assymetric_keys {
             __private_key.push_back(n);
             __private_key.push_back(d);
 
+            // for(int i=0;i<__public_key.size();i++)
+            //     cout<<__public_key[i]<<" ";
+            // cout<<endl;
+
             return __public_key;
         }
 
         vector<double> get_private_key() {
+            // for(int i=0;i<__private_key.size();i++)
+            //     cout<<__private_key[i]<<" ";
+            // cout<<endl;
             return __private_key;
         }
 };

@@ -36,7 +36,9 @@ int main(int argc, char** argv) {
 
 	// receive server public key
 	double assym_public_key[2];
-	read(network_socket, assym_public_key, 2);
+	auto n = read(network_socket, assym_public_key, sizeof(assym_public_key));
+	if (n < 0) 
+        printf("ERROR reading from socket");
 	cout<<"Server sent the public key="<<assym_public_key[0]<<" "<<assym_public_key[1]<<"\n";;
 
 	// create digital envelope using RSA

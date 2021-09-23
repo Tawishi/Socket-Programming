@@ -44,11 +44,22 @@ int main() {
     // generate the Server Private and Public keys
     assymetric_keys __keys;
     vector<double> public_key = __keys.generate_keys();
-    vector<double> private_key = __keys.get_private_key(); 
+    vector<double> private_key = __keys.get_private_key();
+
+    for(int i=0;i<public_key.size();i++)
+        cout<<public_key[i]<<" ";
+    cout<<endl;
+
+    for(int i=0;i<private_key.size();i++)
+        cout<<private_key[i]<<" ";
+    cout<<endl; 
 
     // send public key to client
     double pub_key[] = {public_key[0],public_key[1]};
-    send(client_socket, pub_key,2,0);
+    for(int i=0;i<2;i++)
+        cout<<pub_key[i]<<" ";
+    cout<<endl;
+    send(client_socket, pub_key,sizeof(pub_key),0);
     cout<<"Public key shared with client\n\n";
 
     // receive digital envelope from client
@@ -67,7 +78,9 @@ int main() {
 	
     // receive and decrtypt the encrypted message from client
     char message[255];
-    read(client_socket, &message, sizeof(message));
+    auto m = read(client_socket, &message, sizeof(message));
+    if (m < 0) 
+        printf("ERROR reading from socket");
 	cout<<"Encrypted Client message = "<<message<<"\n";
 
     string plaintext = decrypt(message, K);
