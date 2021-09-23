@@ -51,7 +51,7 @@ int main() {
     send(client_socket, pub_key,2,0);
     cout<<"Public key shared with client\n\n";
 
-    // read the envelope from client
+    // receive digital envelope from client
     double digital_env;
     auto n = read(client_socket, &digital_env,sizeof(digital_env));
     if (n < 0) 
@@ -59,15 +59,18 @@ int main() {
     cout<<"Digital envelope sent by client : "<<digital_env<<"\n";
 
     // decrypt Symmetric key using sender Private key - RSA
+    cout<<"private_key(d)="<<private_key[1]<<endl;
     double K = pow(digital_env, private_key[1]);
+    cout<<"K="<<K<<"\n";
     K = fmod(K, private_key[0]);
+    cout<<"K="<<K<<"\n";
 	
     // receive and decrtypt the encrypted message from client
     char message[255];
     read(client_socket, &message, sizeof(message));
 	cout<<"Encrypted Client message = "<<message<<"\n";
 
-    string plaintext = decrypt(message);
+    string plaintext = decrypt(message, K);
 	printf("The client sent the message - %s\nwhich translates to ", message);
     cout<<plaintext<<"\n";
 

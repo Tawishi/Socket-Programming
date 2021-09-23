@@ -37,10 +37,10 @@ int main(int argc, char** argv) {
 	// receive server public key
 	double assym_public_key[2];
 	read(network_socket, assym_public_key, 2);
-	cout<<"Server sent the public key="<<assym_public_key[0]<<" "<<assym_public_key[0]<<"\n";;
+	cout<<"Server sent the public key="<<assym_public_key[0]<<" "<<assym_public_key[1]<<"\n";;
 
 	// create digital envelope using RSA
-	int __sym_key = 10;
+	double __sym_key = 10;
 	double digital_env = pow(__sym_key, assym_public_key[1]);
 	cout<<"assym_public_key(n,e)="<<"("<<assym_public_key[0]<<","<<assym_public_key[1]<<")\n";
 	cout<<"pow(m,e)="<<digital_env<<"\n";

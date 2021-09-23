@@ -4,10 +4,10 @@ Decrypts the message argunment and returns the plain text
 #include <iostream>
 #include <string.h>
 using namespace std;
-string decrypt(string message)
+string decrypt(string message, int key)
 {
     string result = "";
-    int s = 26 - 10; // using cyclic property of Caesar-cipher
+    int s = 26 - key; // using cyclic property of Caesar-cipher
     // traverse text
     for (int i=0;i<message.length();i++)
     {
