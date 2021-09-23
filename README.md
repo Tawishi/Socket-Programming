@@ -12,7 +12,7 @@ C++/C code for sending encrypted message from Client to Server and decryting it 
  ./server
  ```
  ```
- ./client
+ ./client message
  ```
   ### Output
 ![image](https://github.com/Tawishi/Socket-Programming/blob/Caesar-ciper/Images/nsc2.jpg)<br>
