@@ -12,9 +12,8 @@ C++/C code for sending encrypted message from Client to Server and decryting it 
  ./server
  ```
  ```
- ./client message
+ ./client "message"
  ```
   ### Output
-![image](https://github.com/Tawishi/Socket-Programming/blob/Caesar-ciper/Images/nsc2.jpg)<br>
-![image](https://github.com/Tawishi/Socket-Programming/blob/Caesar-ciper/Images/nsc3.jpg)
+![image](https://user-images.githubusercontent.com/55306738/134533789-fe4a6e70-e214-4620-aa10-99d2974b6bb2.png)
 <b>Note : </b><i>For string input with more than one word enclose input within ""</i>
