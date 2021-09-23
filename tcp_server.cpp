@@ -1,11 +1,16 @@
 #include<iostream>
-#include<string>
+#include<vector>
+#include <math.h>
 
 #include<sys/socket.h> 
 #include<sys/types.h>
 
 #include<netinet/in.h> 
 #include<unistd.h>
+
+#include "decrypt.h"
+#include "rsa_keys.h"
+
 
 using namespace std;
 
@@ -34,27 +39,40 @@ int main() {
     // Receive data from Client
 	char client_message[256];
     read(client_socket, &client_message, sizeof(client_message));
-	printf("Client message - %s\n ", client_message);
+	printf("Client message - %s", client_message);
 
-    // send public key
-    send(client_socket, "Public key =\n", 15,0);
+    // generate the Server Private and Public keys
+    assymetric_keys __keys;
+    vector<double> public_key = __keys.generate_keys();
+    vector<double> private_key = __keys.get_private_key(); 
+
+    // send public key to client
+    double pub_key[] = {public_key[0],public_key[1]};
+    send(client_socket, pub_key,2,0);
     cout<<"Public key shared with client\n\n";
 
     // read the envelope from client
-    char buffer[256];
-    auto n = read(client_socket, buffer,255);
+    double digital_env;
+    auto n = read(client_socket, &digital_env,sizeof(digital_env));
     if (n < 0) 
         printf("ERROR reading from socket");
-    printf("Digital envelope by client : %s\n",buffer);
+    cout<<"Digital envelope sent by client : "<<digital_env<<"\n";
 
-    // decrypt message Symmetric key and display
+    // decrypt Symmetric key using sender Private key - RSA
+    double K = pow(digital_env, private_key[1]);
+    K = fmod(K, private_key[0]);
+	
+    // receive and decrtypt the encrypted message from client
     char message[255];
-	read(client_socket, &message, sizeof(message));
-	cout<<"Client message = "<<message<<"\n";
+    read(client_socket, &message, sizeof(message));
+	cout<<"Encrypted Client message = "<<message<<"\n";
 
-    // receive the encrypted message from client
+    string plaintext = decrypt(message);
+	printf("The client sent the message - %s\nwhich translates to ", message);
+    cout<<plaintext<<"\n";
 
-    //close socket
+    //close sockets
+    close(client_socket);
     close(server_socket);
 
     return 0;

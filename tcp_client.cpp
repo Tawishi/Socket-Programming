@@ -1,10 +1,13 @@
 #include<iostream>
+#include<math.h>
 
 #include<sys/socket.h> 
 #include<sys/types.h>
 
 #include<netinet/in.h> 
-#include <unistd.h> 
+#include <unistd.h>
+
+#include "encrypt.h"
 
 
 using namespace std;
@@ -31,23 +34,33 @@ int main(int argc, char** argv) {
 	// request public key
 	write(network_socket, "Please share the server Public key\n",sizeof("Please share the server Public key\n"));
 
-	// // Send encrypted message to Server
-	// string str_server_message = encrypt(argc, argv);
-	// char server_message[256];
-
-	// for(int i=0;i<str_server_message.length();i++) {
-	// 	server_message[i] = str_server_message[i];
-	// }
-
 	// receive server public key
-	char message[255];
-	read(network_socket, &message, sizeof(message));
-	cout<<"Server sent the public key = \t"<<message<<"\n";
+	double assym_public_key[2];
+	read(network_socket, assym_public_key, 2);
+	cout<<"Server sent the public key="<<assym_public_key[0]<<" "<<assym_public_key[0]<<"\n";;
+
+	// create digital envelope using RSA
+	int __sym_key = 10;
+	double digital_env = pow(__sym_key, assym_public_key[1]);
+	cout<<"assym_public_key(n,e)="<<"("<<assym_public_key[0]<<","<<assym_public_key[1]<<")\n";
+	cout<<"pow(m,e)="<<digital_env<<"\n";
+    digital_env = fmod(digital_env, assym_public_key[0]);
+	cout<<"% n ="<<digital_env<<"\n";
 
 	// send the digital evelope to server
-	write(network_socket, "Digital Envelope\n",sizeof("Digital Envelope\n"));
+	cout<<"size digital env = "<<sizeof(digital_env)<<"\n";
+	cout<<"digital env = "<<digital_env<<"\n";
+	write(network_socket, &digital_env,sizeof(digital_env));
 
 	// send the symmetric encrypted message to server
+	string str_server_message = encrypt(argc, argv);
+	char server_message[256];
+
+	for(int i=0;i<str_server_message.length();i++) {
+		server_message[i] = str_server_message[i];
+	}
+
+	write(network_socket, &server_message,sizeof(server_message));
 
 	// close socket
 	close(network_socket);

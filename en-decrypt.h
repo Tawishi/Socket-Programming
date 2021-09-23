@@ -2,7 +2,6 @@
 Class to Encrypt-Decrypt the key using RSA
 */
 #include <iostream>
-#include <string.h>
 #include <math.h>
 #include "rsa_keys.h"
 
@@ -31,7 +30,7 @@ class rsa {
 
         double decrypt(double cipher)
         {          
-            long double m = pow(cipher, private_key[1]);
+            double m = pow(cipher, private_key[1]);
             m = fmod(m, private_key[0]);
             return m;
         }
